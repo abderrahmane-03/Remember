@@ -1,0 +1,26 @@
+<div class="game-container">
+    <app-score [score]="score"></app-score>
+    <!-- Binding score property -->
+
+    <button *ngIf="!isGameActive" (click)="startGame()">Start Game</button>
+
+    <div *ngIf="isGameActive">
+        <div *ngIf="showSequence">
+            <p>Watch the sequence:</p>
+            <div class="sequence">
+                <!-- Show color blocks corresponding to the sequence -->
+                <div *ngFor="let color of sequence" [style.background-color]="color" class="color-block"></div>
+            </div>
+        </div>
+        <div *ngIf="!showSequence">
+            <p>Repeat the sequence:</p>
+            <div class="timer">Time remaining: {{ timer }} seconds</div>
+            <div class="color-buttons">
+                <!-- Use the fixed button order -->
+                <button *ngFor="let color of buttonOrder" [style.background-color]="color" (click)="addUserResponse(color)">
+          {{ color }}
+        </button>
+            </div>
+        </div>
+    </div>
+</div>
